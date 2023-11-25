@@ -6,14 +6,18 @@ import Logo from "../../assets/Images/logo.ico";
 import { Nav_Buttons } from "../../data";
 import { Columns, Gear } from "phosphor-react";
 import { faker } from "@faker-js/faker";
+import useSettings from "../../hooks/useSettings";
 
 const DashboardLayout = () => {
+ 
   const theme = useTheme();
   console.log(theme);
   const [selected, setSelected] = useState(0);
+  const { onToggleMode } = useSettings();
 
   return (
-    <>
+    
+    <Stack direction="row" >
       <Box
         padding={2}
         sx={{
@@ -30,7 +34,6 @@ const DashboardLayout = () => {
           spacing={2}
           justifyContent="space-between"
           height="100%"
-        
         >
           <Stack alignItems={"center"} spacing={4}>
             <Box
@@ -49,7 +52,6 @@ const DashboardLayout = () => {
               sx={{ width: "max-content" }}
               direction="column"
               alignItems="center"
-          
             >
               {Nav_Buttons.map((el) =>
                 el.index === selected ? (
@@ -73,7 +75,7 @@ const DashboardLayout = () => {
                       setSelected(el.index);
                     }}
                     key={el.index}
-                    sx={{ width: "max-content", color: "#000" }}
+                    sx={{ width: "max-content", color: theme.palette.mode === "light" ? "#000" : theme.palette.text.primary }}
                   >
                     {el.icon}
                   </IconButton>
@@ -88,7 +90,7 @@ const DashboardLayout = () => {
                     borderRadius: 1.5,
                   }}
                   p={1}
-                >
+                >  
                   <IconButton>
                     <Gear />
                   </IconButton>
@@ -98,22 +100,29 @@ const DashboardLayout = () => {
                   onClick={() => {
                     setSelected(3);
                   }}
+                  sx={{ width: "max-content", color: theme.palette.mode === "light" ? "#000" : theme.palette.text.primary }}
                 >
                   <Gear />
                 </IconButton>
               )}
             </Stack>
           </Stack>
-         
+
+            
           <Stack spacing={4}>
-          <Switch  defaultChecked />
+            <Switch
+              onChange={() => {
+                onToggleMode();
+              }}
+              defaultChecked
+            />
             <Avatar src={faker.image.avatar()} />
           </Stack>
         </Stack>
       </Box>
 
       <Outlet />
-    </>
+    </Stack>
   );
 };
 

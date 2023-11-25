@@ -19,6 +19,7 @@ const Loadable = (Component) => (props) => {
 
 
 export default function Router() {
+  
   return useRoutes([
     {
       path: "/", 
@@ -39,6 +40,10 @@ const GeneralApp = Loadable(
   lazy(() => import("../pages/dashboard/GeneralApp")),
 );
 const Page404 = Loadable(lazy(() => import("../pages/Page404")));
+
+
+
+
 
 
 

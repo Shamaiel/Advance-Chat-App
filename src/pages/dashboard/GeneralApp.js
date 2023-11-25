@@ -1,12 +1,25 @@
 import React from "react";
+import Chats from "./Chats";
+
+
 
 const GeneralApp = () => {
 
+
   return (
     <>
-      App
+   <Chats/>
+    
     </>
-  );
-};
+    
+    
+   
+  )
+}
+
+
 
 export default GeneralApp;
+
+
+
